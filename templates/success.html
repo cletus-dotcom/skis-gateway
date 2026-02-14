@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}SKIS Gateway – Sent{% endblock %}
+{% block content %}
+  <header class="header">
+    <h1>SKIS Gateway</h1>
+  </header>
+
+  <div class="success-card">
+    <h2 class="success-title">Reference number sent</h2>
+    <p class="success-body">
+      Your payment reference has been sent to the verifier at {{ verifier_email }}.
+    </p>
+    <h3 class="steps-title">What happens next:</h3>
+    <ol class="steps-list">
+      <li>The verifier will confirm your payment using the reference number and company details.</li>
+      <li>You will receive a confirmation email at <strong>{{ submission.email }}</strong> once verified.</li>
+      <li>Keep your reference number for your records.</li>
+    </ol>
+  </div>
+
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Start new registration</a>
+{% endblock %}

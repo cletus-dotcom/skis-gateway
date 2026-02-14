@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}SKIS Gateway – Verification{% endblock %}
+{% block content %}
+  <header class="header">
+    <h1>SKIS Gateway</h1>
+    <p class="subheader">Payment verification</p>
+  </header>
+
+  <p class="reference-hint">
+    Enter your GCash or QR Ph reference number. We will send it to the verifier so they can confirm your payment and email you back at <strong>{{ submission.email }}</strong>.
+  </p>
+  <p class="reference-hint small">Verifier: cletusacaido@gmail.com</p>
+
+  <form class="form" method="post" action="{{ url_for('verify', submission_id=submission_id) }}">
+    <label for="reference_number">Reference number</label>
+    <input id="reference_number" name="reference_number" type="text" required placeholder="Reference number">
+
+    <button type="submit" class="btn btn-primary">Send for verification</button>
+  </form>
+  <a href="{{ url_for('qr', submission_id=submission_id) }}" class="btn btn-text">Back to QR code</a>
+{% endblock %}

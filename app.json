@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "SKIS Gateway",
+    "slug": "skis-gateway",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "skisgateway",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "bundleIdentifier": "com.skisgateway.app",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.skisgateway.app"
+    },
+    "plugins": [
+      "expo-router"
+    ]
+  }
+}

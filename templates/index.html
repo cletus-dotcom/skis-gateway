@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}SKIS Gateway – Registration{% endblock %}
+{% block content %}
+  <header class="header">
+    <h1>SKIS Gateway</h1>
+    <p class="subheader">App Registration / Subscription Renewal</p>
+  </header>
+
+  <form class="form" method="post" action="{{ url_for('submit') }}">
+    <label for="company_name">Name of company</label>
+    <input id="company_name" name="company_name" type="text" value="{{ company_name or '' }}" required placeholder="e.g. Acme Corp">
+
+    <label for="address">Address</label>
+    <textarea id="address" name="address" rows="3" required placeholder="Full address">{{ address or '' }}</textarea>
+
+    <label for="representative_name">Name of representative</label>
+    <input id="representative_name" name="representative_name" type="text" value="{{ representative_name or '' }}" required placeholder="Full name">
+
+    <label for="email">Email address</label>
+    <input id="email" name="email" type="email" value="{{ email or '' }}" required placeholder="email@company.com">
+
+    <label for="contact_number">Contact number</label>
+    <input id="contact_number" name="contact_number" type="tel" value="{{ contact_number or '' }}" required placeholder="e.g. 09XX XXX XXXX">
+
+    <label for="app_software_name">App/Software Name</label>
+    <input id="app_software_name" name="app_software_name" type="text" value="{{ app_software_name or '' }}" readonly placeholder="Set via link from another app" autocomplete="off" style="display:block; min-height: 48px; margin-bottom: 16px;">
+
+    <label for="amount">Amount (PHP)</label>
+    <input id="amount" name="amount" type="text" value="{{ amount or '' }}" placeholder="Enter amount or use link with ?amount=...">
+
+    <button type="submit" class="btn btn-primary">Submit & Show GCash QR</button>
+  </form>
+{% endblock %}
