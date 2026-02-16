@@ -3,6 +3,11 @@
 {% block content %}
   <header class="header">
     <h1>SKIS Gateway</h1>
+    <hr class="header-sep">
+    <p class="header-brand">SerKai IT Solutions</p>
+    <p class="header-tagline">Innovating software. Empowering businesses</p>
+    <p class="header-small">Affiliate of B and J Computer Sales and Electronic Services Inc.</p>
+    <hr class="header-sep">
     <p class="subheader">App Registration / Subscription Renewal</p>
   </header>
 
@@ -23,7 +28,7 @@
     <input id="contact_number" name="contact_number" type="tel" value="{{ contact_number or '' }}" required placeholder="e.g. 09XX XXX XXXX">
 
     <label for="app_software_name">App/Software Name</label>
-    <input id="app_software_name" name="app_software_name" type="text" value="{{ app_software_name or '' }}" readonly placeholder="Set via link from another app" autocomplete="off" style="display:block; min-height: 48px; margin-bottom: 16px;">
+    <input id="app_software_name" name="app_software_name" type="text" value="{{ app_software_name or '' }}" readonly placeholder="Set via link from another app" autocomplete="off">
 
     <label for="amount">Amount (PHP)</label>
     <input id="amount" name="amount" type="text" value="{{ amount or '' }}" placeholder="Enter amount or use link with ?amount=...">

@@ -38,10 +38,37 @@ body {
   margin: 0 0 4px;
 }
 
+.header-sep {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 12px 0;
+  width: 100%;
+}
+
+.header-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 4px;
+}
+
+.header-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  margin: 0 0 2px;
+}
+
+.header-small {
+  font-size: 11px;
+  color: var(--muted);
+  margin: 0;
+  opacity: 0.9;
+}
+
 .subheader {
   font-size: 14px;
   color: var(--muted);
-  margin: 0;
+  margin: 12px 0 0;
 }
 
 .form label {

@@ -25,6 +25,16 @@ PORT = int(os.environ.get("PORT", 8035))
 VERIFIER_EMAIL = "cletusacaido@gmail.com"
 
 
+@app.after_request
+def disable_html_cache(response):
+    """Prevent browsers from caching HTML so localhost always shows the latest form."""
+    if response.content_type and "text/html" in response.content_type:
+        response.headers["Cache-Control"] = "no-store, no-cache, must-revalidate, max-age=0"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
+
+
 def qr_data_url(payload: str) -> str:
     """Generate QR code PNG and return as data URL."""
     qr = qrcode.QRCode(version=1, box_size=8, border=4)
@@ -42,7 +52,33 @@ def qr_data_url(payload: str) -> str:
 def index():
     amount = request.args.get("amount") or request.args.get("amt") or ""
     app_software_name = request.args.get("app_name") or request.args.get("app_software_name") or request.args.get("software") or ""
+    # Debug: show which template file is used and whether it contains App/Software Name
+    if request.args.get("debug"):
+        root = os.path.dirname(os.path.abspath(__file__))
+        path = os.path.join(root, "templates", "index.html")
+        try:
+            raw = open(path, encoding="utf-8").read()
+            has_field = "app_software_name" in raw and "App/Software Name" in raw
+        except Exception as e:
+            raw, has_field = "", False
+        return (
+            f"<pre style='background:#1e293b;color:#e2e8f0;padding:16px;font-size:14px;'>"
+            f"Template file: {path}\n"
+            f"File exists: {os.path.isfile(path)}\n"
+            f"Contains 'App/Software Name' and 'app_software_name': {has_field}\n"
+            f"First 600 chars of file:\n{raw[:600]!r}\n\n"
+            f"<a href='/'>Back to form (without ?debug=1)</a></pre>"
+        )
     return render_template("index.html", amount=amount, app_software_name=app_software_name)
+
+
+@app.route("/_template_path")
+@app.route("/template_path")
+def template_path():
+    """Debug: show where Flask is loading templates from (so you can confirm it's this project)."""
+    root = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(root, "templates", "index.html")
+    return f"Templates folder: {os.path.join(root, 'templates')}<br>index.html exists: {os.path.isfile(path)}"
 
 
 @app.route("/submit", methods=["POST"])
